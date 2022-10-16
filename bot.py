@@ -65,7 +65,7 @@ async def level(client, message):
                 level.insert_one(newxp)
 
             else:
-                xp = xpnum["xp"] + 10
+                xp = xpnum["xp"] + 59
                 level.update_one({"level": user_id, "chatid": chat}, {
                     "$set": {"xp": xp}})
                 l = 0
