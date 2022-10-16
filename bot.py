@@ -70,15 +70,68 @@ async def level(client, message):
                 xp = xpnum["xp"] + 10
                 level.update_one({"level": user_id, "chatid": chat, "LvN": 0}, {
                     "$set": {"xp": xp}})
-                l = 0
-                while True:
-                    if xp < ((50*(l**2))+(50*(l))):
-                         break
-                    l += 1
+                lvl = int(xp), int(lvl)
+                if xp < 500:
+                    lvl = 1
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
-                    "$set": {"LvN": l}})
-                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {l}")
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 1500:
+                    lvl = 2
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 2500:
+                    lvl = 3
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 5000:
+                    lvl = 4
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 10000:
+                    lvl = 5
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 15000:
+                    lvl = 6
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 20000:
+                    lvl = 7
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 30000:
+                    lvl = 8
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 50000:
+                    lvl = 9
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                elif xp < 100000:
+                    lvl = 10
+                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+                    "$set": {"LvN": lvl}})
+                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
+                
 
+
+#                l = 0
+#                while True:
+#                    if xp < ((50*(l**2))+(50*(l))):
+#                         break
+#                    l += 1
+#                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
+#                    "$set": {"LvN": l}})
+#                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {l}")
 
 #                xp -= ((50*((l-1)**2))+(50*(l-1)))
 #                if xp == 0:
