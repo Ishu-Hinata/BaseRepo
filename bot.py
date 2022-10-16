@@ -1,22 +1,4 @@
-"""
-MIT License
-Copyright (C) 2021-2022 MetaVoid (MoeZilla) 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
+
 
 from pyrogram import Client , filters
 from pymongo import MongoClient
@@ -36,44 +18,12 @@ bot = Client(
     bot_token = BOT_TOKEN
 )
 
-async def is_admins(chat_id: int):
-    return [
-        member.user.id
-        async for member in bot.iter_chat_members(
-            chat_id, filter="administrators"
-        )
-    ]
-
 levellink =["https://telegra.ph/file/6620fe683ff3989268c7f.mp4", "https://telegra.ph/file/c6bbce91cb75d4ab318ae.mp4", "https://telegra.ph/file/c2ac7b63d248f49da952c.mp4", "https://telegra.ph/file/b100466a5f0c42fa7255f.mp4", "https://telegra.ph/file/67c9dc7b59f78aa7aaf4c.mp4", "https://telegra.ph/file/06e2d74343e89c9d3cd12.mp4", "https://telegra.ph/file/88458a18eea8e86292b14.mp4", "https://telegra.ph/file/e3786d4f321ff4335a70f.mp4"]
 levelname = ["Team Rocket", "Stray God", "Vector", "Hero Association", "Z Warrior", "Black Knight", "Ghoul", "Overlord"]
 levelnum = [2,5,15,25,35,50,70,100]
 
 
-
-@bot.on_message(
-    filters.command("level", prefixes=["/", ".", "?", "-"])
-    & ~filters.private)
-async def levelsystem(_, message): 
-    leveldb = MongoClient(MONGO_URL)
-   
-    toggle = leveldb["ToggleDb"]["Toggle"] 
-    if message.from_user:
-        user = message.from_user.id
-        chat_id = message.chat.id
-        if user not in (
-            await is_admins(chat_id)
-        ):
-            return await message.reply_text(
-                "You are not admin"
-            )
-    is_level = toggle.find_one({"chat_id": message.chat.id})
-    if not is_level:
-        toggle.insert_one({"chat_id": message.chat.id})
-        await message.reply_text("Level System Enable")
-    else:
-        toggle.delete_one({"chat_id": message.chat.id})
-        await message.reply_text("Level System Disable")
-
+chat_id = [-1001620202507]
 
 @bot.on_message(
     (filters.document
