@@ -34,14 +34,76 @@ async def levelsystem(_, message):
         toggle.delete_one({"chat_id": message.chat.id})
         await message.reply_text("Level System Disable")
 
+@bot.on_message((filters.text) & ~filters.private, group=8)
+async def level(client, message):
+    chat = message.chat.id
+    user_id = message.from_user.id    
 
+    leveldb = MongoClient(MONGO_URL)
+    
+    level = leveldb["LevelDb"]["Level"] 
+    toggle = leveldb["ToggleDb"]["Toggle"] 
+
+    is_level = toggle.find_one({"chat_id": message.chat.id})
+    if is_level:
+        xpnum = level.find_one({"level": user_id, "chatid": chat})
+
+        if not message.from_user.is_bot:
+            if xpnum is None:
+                newxp = {"level": user_id, "chatid": chat, "lvn": 0, "xp": 10}
+                level.insert_one(newxp)
+
+            else:
+                xp = xpnum["xp"] + 25
+                level.update_one({"level": user_id, "chatid": chat}, {
+                    "$set": {"xp": xp}})
+                l = 0
+                while True:
+                    if xp < ((50*(l**2))+(50*(l))):
+                         break
+                    l += 1
+                xp -= ((50*((l-1)**2))+(50*(l-1)))
+                if xp == 0:
+#                    await message.reply_text(f"🌟 {message.from_user.mention}, You have reached level {l}**, Nothing can stop you on your way!")
+    
+                    for lv in range(len(levelname)) and range(len(levellink)):
+                            if l == levelnum[lv]:            
+                                Link = f"{levellink[lv]}"
+                                await message.reply_video(video=Link, caption=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")
+                  
 
 @bot.on_message(
     (filters.document
-     | filters.text
-     | filters.photo
      | filters.sticker
-     | filters.animation
+     | filters.animation)
+    & ~filters.private,
+    group=8,
+)
+async def level(client, message):
+    chat = message.chat.id
+    user_id = message.from_user.id    
+
+    leveldb = MongoClient(MONGO_URL)
+    
+    level = leveldb["LevelDb"]["Level"] 
+    toggle = leveldb["ToggleDb"]["Toggle"] 
+
+    is_level = toggle.find_one({"chat_id": message.chat.id})
+    if is_level:
+        xpnum = level.find_one({"level": user_id, "chatid": chat})
+
+        if not message.from_user.is_bot:
+            if xpnum is None:
+                newxp = {"level": user_id, "chatid": chat, "lvn": 0, "xp": 10}
+                level.insert_one(newxp)
+
+            else:
+                xp = xpnum["xp"] + 5
+                level.update_one({"level": user_id, "chatid": chat}, {
+                    "$set": {"xp": xp}})
+
+@bot.on_message(
+    (filters.photo
      | filters.video)
     & ~filters.private,
     group=8,
@@ -65,23 +127,10 @@ async def level(client, message):
                 level.insert_one(newxp)
 
             else:
-                xp = xpnum["xp"] + 50
+                xp = xpnum["xp"] + 15
                 level.update_one({"level": user_id, "chatid": chat}, {
                     "$set": {"xp": xp}})
-                l = 0
-                while True:
-                    if xp < ((50*(l**2))+(50*(l))):
-                         break
-                    l += 1
-                xp -= ((50*((l-1)**2))+(50*(l-1)))
-                if xp == 0:
-#                    await message.reply_text(f"🌟 {message.from_user.mention}, You have reached level {l}**, Nothing can stop you on your way!")
-    
-                    for lv in range(len(levelname)) and range(len(levellink)):
-                            if l == levelnum[lv]:            
-                                Link = f"{levellink[lv]}"
-                                await message.reply_video(video=Link, caption=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")
-                  
+                
 
 
 
