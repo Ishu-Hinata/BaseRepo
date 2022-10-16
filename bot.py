@@ -22,8 +22,21 @@ levellink =["https://telegra.ph/file/6620fe683ff3989268c7f.mp4", "https://telegr
 levelname = ["Team Rocket", "Stray God", "Vector", "Hero Association", "Z Warrior", "Black Knight", "Ghoul", "Overlord"]
 levelnum = [2,5,15,25,35,50,70,100]
 
+@bot.on_message(filters.command("level"))
+async def levelsystem(_, message): 
+    leveldb = MongoClient(MONGO_URL) 
+    toggle = leveldb["ToggleDb"]["Toggle"]     
+    user = message.from_user.id
+    chat_id = message.chat.id
+    is_level = toggle.find_one({"chat_id": message.chat.id})
+    if not is_level:
+        toggle.insert_one({"chat_id": message.chat.id})
+        await message.reply_text("Level System Enable")
+    else:
+        toggle.delete_one({"chat_id": message.chat.id})
+        await message.reply_text("Level System Disable")
 
-chat_id = [-1001620202507]
+
 
 @bot.on_message(
     (filters.document
@@ -73,9 +86,7 @@ async def level(client, message):
                   
 
                                
-@bot.on_message(
-    filters.command("rank", prefixes=["/", ".", "?", "-"])
-    & ~filters.private)
+@bot.on_message(filters.command("lvl"))
 async def rank(client, message):
     chat = message.chat.id
     user_id = message.from_user.id    
