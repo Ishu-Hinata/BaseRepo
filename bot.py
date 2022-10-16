@@ -1,5 +1,3 @@
-
-
 from pyrogram import Client , filters
 from pymongo import MongoClient
 import os
@@ -63,59 +61,59 @@ async def level(client, message):
 
         if not message.from_user.is_bot:
             if xpnum is None:
-                newxp = {"level": user_id, "chatid": chat, "xp": 10}
+                newxp = {"level": user_id, "chatid": chat, "lvn": 0, "xp": 10}
                 level.insert_one(newxp)   
                     
             else:
                 xp = xpnum["xp"] + 10
                 level.update_one({"level": user_id, "chatid": chat, "LvN": 0}, {
                     "$set": {"xp": xp}})
-                if xp < 50:
+                if xp <= 50:
                     lvl = 1
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 100:
+                elif xp <= 100:
                     lvl = 2
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 200:
+                elif xp <= 200:
                     lvl = 3
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 250:
+                elif xp <= 250:
                     lvl = 4
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 500:
+                elif xp <= 500:
                     lvl = 5
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 550:
+                elif xp <= 550:
                     lvl = 6
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 600:
+                elif xp <= 600:
                     lvl = 7
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 650:
+                elif xp <= 650:
                     lvl = 8
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 700:
+                elif xp <= 700:
                     lvl = 9
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
                     await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {lvl}")
-                elif xp < 750:
+                elif xp <= 750:
                     lvl = 10
                     level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
                     "$set": {"LvN": lvl}})
