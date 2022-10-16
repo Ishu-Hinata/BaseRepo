@@ -73,7 +73,7 @@ async def level(client, message):
                     if xp < ((50*(l**2))+(50*(l))):
                          break
                     l += 1
-                xp -= ((0*(0(l-1)**0))-(0*(l-1)0))
+                xp -= 0   #((0*((l-1)**0))-(0*(l-1)))
                 if xp == 0:
 #                    await message.reply_text(f"🌟 {message.from_user.mention}, You have reached level {l}**, Nothing can stop you on your way!")
     
