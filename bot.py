@@ -62,31 +62,27 @@ async def level(client, message):
         if not message.from_user.is_bot:
             if xpnum is None:
                 newxp = {"level": user_id, "chatid": chat, "lvn": 0, "xp": 10}
-                level.insert_one(newxp)   
-                    
+                level.insert_one(newxp)
+
             else:
-                xp = xpnum["xp"] + 40
-                level.update_one({"level": user_id, "chatid": chat, "LvN": 0}, {
+                xp = xpnum["xp"] + 10
+                level.update_one({"level": user_id, "chatid": chat}, {
                     "$set": {"xp": xp}})
                 l = 0
                 while True:
                     if xp < ((50*(l**2))+(50*(l))):
                          break
                     l += 1
-                    level.update_one({"level": user_id, "chatid": chat, "xp": xp}, {
-                    "$set": {"LvN": l}})
-                    await message.reply_text(f"{message.from_user.mention}\n⚠️Reached level {l}")
-
                 xp -= ((50*((l-1)**2))+(50*(l-1)))
                 if xp == 0:
-#                    await message.reply_text(f"🌟 {message.from_user.mention}, You have reached level {l}, Nothing can stop you on your way!")
+#                    await message.reply_text(f"🌟 {message.from_user.mention}, You have reached level {l}**, Nothing can stop you on your way!")
     
                     for lv in range(len(levelname)) and range(len(levellink)):
                             if l == levelnum[lv]:            
                                 Link = f"{levellink[lv]}"
-                                await message.reply_video(video=Link, caption=f"{message.from_user.mention}, You have reached Rank Name **{levelname[lv]}**")
+                                await message.reply_video(video=Link, caption=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")
                   
-
+       
                                
 @bot.on_message(filters.command("lvl"))
 async def rank(client, message):
