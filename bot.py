@@ -35,6 +35,9 @@ async def level(client, message):
     user_id = message.from_user.id
     xpnum = level.find_one({"level": user_id})
     if not message.from_user.is_bot:
+        if xpnum is None:
+            newxp = {"level": user_id, "xp": 10}
+            level.insert_one(newxp)
 
 
 
