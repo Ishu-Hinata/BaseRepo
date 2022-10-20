@@ -70,7 +70,7 @@ async def level(client, message):
 @bot.on_message(filters.command("m"))
 async def rank(client, message):
     leveldb = MongoClient(MONGO_URL)
-    level = leveldb["LevelDb"]["Level"] 
+    level = leveldb["TestLvL"]["Tester"]
     user_id = message.from_user.id    
     xpnum = level.find_one({"level": user_id})
     xp = xpnum["xp"]
