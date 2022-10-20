@@ -60,43 +60,9 @@ async def level(client, message):
                         Link = f"{levellink[lv]}"
                         await message.reply_video(video=Link, caption=f"⚠️Event!  \n\n❗Level {l} \n\n☯️title: {levelname[lv]}")
 
-
-
-
-
 # txt(f"⚠️level: {l}")
-    
 #text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
 
-async def get_user_info(client, message):
-    leveldb = MongoClient(MONGO_URL)
-    level = leveldb["TestLvL"]["Tester"]
-    user_id = message.from_user.id
-    user = await bot.get_users(client)
-    photo_id = user.photo.big_file_id if user.photo else None
-    xpnum = level.find_one({"level": user_id})
-    xp = xpnum["xp"]
-    l = 0
-    r = 0
-    while True:
-        if xp < ((125*(l**2))+(125*(l))):
-            break
-        l += 1
-    xp -= ((125*((l-1)**2))+(125*(l-1)))
-    rank = level.find().sort("xp", -1)
-    for k in rank:
-        r += 1
-        if xpnum["level"] == k["level"]:
-            break
-    body = {
-        "level": l,
-        "exp": {int(xp * 4)}/{int(2000 *((1/2) * l))},
-        "rank": r,
-    }
-    caption = body
-    return [caption, photo_id]
-                               
-        #f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
 
 async def get_user(user, already=False):
     user = await bot.get_users(user)
@@ -109,6 +75,7 @@ async def get_user(user, already=False):
     xp = xpnum["xp"]
     l = 0
     r = 0
+    a = "ㅤㅤ"
     while True:
         if xp < ((125*(l**2))+(125*(l))):
             break
@@ -121,13 +88,15 @@ async def get_user(user, already=False):
         if xpnum["level"] == k["level"]:
             break
     body = { 
-        "✪": [mention],
-        "Eexp": xp,
-        "Level": l,
-        "Rank": r,
-        "F Xp": fk,
+        "╠》": [mention],
+        "║": a,
+        "╠≛ `Reputation`:": a,
+        "╠≛ __Level__:": l,
+        "║      ╒__Rank〉 ": r,
+        "║      ╘__Exp〉 ": fk,
+        "╚══════༻🦋༺═════╝"
     }
-    caption = section("User info results", body)
+    caption = section(" ╔════༻Status༺════╗", body)
     return [caption, photo_id]
 
 @bot.on_message(filters.command("iii"))
