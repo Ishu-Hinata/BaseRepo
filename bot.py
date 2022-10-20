@@ -130,7 +130,7 @@ async def rank(client, message):
                     nrank = (message.text.split(None, 1)[1].strip())[:50]
                     frtxt = f"𝚃𝙸𝚃𝙻𝙴: {nrank}"
                     level.update_one({"USER_ID": member}, {
-                        "$set": {"cstm_rank": frtxt}})
+                        "$set": {"trank": frtxt}})
                     await message.reply_text(f"🎆Added Custom Rank \nUser: {message.reply_to_message.from_user.mention} \nTitle: {nrank}")
         else:
             await message.reply_text("__Bish Reply to user, who's rank you wanna set__")
