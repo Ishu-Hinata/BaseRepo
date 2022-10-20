@@ -96,7 +96,7 @@ async def get_user(user, already=False):
 ║      ╒__Rank〉 {r}__
 ║      ╘__Exp〉 {fk}__
 ╚══════༻🦋༺═════╝
-""") 
+"""
     caption = body
     return [caption, photo_id]
 
