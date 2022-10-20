@@ -47,7 +47,15 @@ async def level(client, message):
                 "$set": {"xp": xp}})
             l = 0
             while True:
-                
+                if xp < ((50*(l**2))+(50*(l))):
+                    break
+                l += 1
+            xp -= ((50*((l-1)**2))+(50*(l-1)))
+            if xp == 0:
+                for lv in range(len(levelname)) and range(len(levellink)):
+                    if l == levelnum[lv]:
+                        Link = f"{levellink[lv]}"
+                        await message.reply_video(video=Link, caption=f"⚠️Event!  \n\n❗Level {l} \n\n☯️title: {levelname[lv]}")
 
 
 
