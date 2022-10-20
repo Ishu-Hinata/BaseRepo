@@ -75,7 +75,7 @@ async def get_user(user, already=False):
     xp = xpnum["xp"]
     l = 0
     r = 0
-    a = "ㅤㅤ"
+    a = "ㅤ"
     while True:
         if xp < ((125*(l**2))+(125*(l))):
             break
@@ -94,7 +94,7 @@ async def get_user(user, already=False):
         "╠≛ __Level__:": l,
         "║      ╒__Rank〉 ": r,
         "║      ╘__Exp〉 ": fk,
-        "╚══════༻🦋༺═════╝"
+        "╚══════༻🦋༺═════╝": a,
     }
     caption = section(" ╔════༻Status༺════╗", body)
     return [caption, photo_id]
