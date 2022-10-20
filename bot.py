@@ -96,34 +96,25 @@ async def get_user_info(client, message):
     caption = body
     return [caption, photo_id]
                                
-@bot.on_message(filters.command("m"))
-async def rok(client, message):
-    user = message.from_user.id
-    m = await message.reply_text("❄️")
-    try:
-        info_caption, photo_id = await get_user_info(user)
-    except Exception as e:
-        return await m.edit(str(e))
-    
-    if not photo_id:
-        return await m.edit(info_caption, disable_web_page_preview=True)
-    photo = await bot.download_media(photo_id)
-    await message.reply_photo(photo, caption=info_caption, quote=False)
-    await m.delete()
-    os.remove(photo)
         #f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
 
 async def get_user(user, already=False):
     user = await bot.get_users(user)
-    mention = user.mention("Link")
+    mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
+
+    leveldb = MongoClient(MONGO_URL)
+    level = leveldb["TestLvL"]["Tester"]
+    xpnum = level.find_one({"level": user_id})
+    xp = xpnum["xp"]
     body = { 
         "✪ Mention": [mention],
+        "Eexp": xp,
     }
-    caption = body
+    caption = section("User info results", body)
     return [caption, photo_id]
 
-@bot.on_message(filters.command("i"))
+@bot.on_message(filters.command("iii"))
 async def info_func(_, message: Message):
     user = message.from_user.id
     m = await message.reply_text("Information Processing...")
