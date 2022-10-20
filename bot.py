@@ -62,8 +62,7 @@ async def level(client, message):
 
 
 MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
-repcli = MongoClient(MONGO_REP_URL) 
-rName = repcli["Custom_rank"]["List_user"]
+
 
 
 async def get_user(user, already=False):
@@ -71,8 +70,7 @@ async def get_user(user, already=False):
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
-    sr = rName.find_one({"user": user_id})
-    xt = sr["cstm_rank"]
+   
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
@@ -93,17 +91,18 @@ async def get_user(user, already=False):
             break
     caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
-     👤 {mention}
-     𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
+👤 {mention}
+   𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
      
      ʟᴇᴠᴇʟ: {l}  ʀᴀɴᴋ: {r}
      ᴇxᴘ:  {fxp}
 """
     full_caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
-     💠 {mention}
-     🎖️𝚃𝙸𝚃𝙻𝙴:  {xt}
-       𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
+       𝚃𝙸𝚃𝙻𝙴:  {xt}
+
+💠 {mention}
+   𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
      
      𝙇𝙀𝙑𝙀𝙇: {l}  ʀᴀɴᴋ: {r}
      ᴇxᴘ:  {fxp}
@@ -113,12 +112,16 @@ async def get_user(user, already=False):
 @bot.on_message(filters.command("iii"))
 async def info_func(_, message: Message):
     user = message.from_user.id
+    repcli = MongoClient(MONGO_REP_URL) 
+    rName = repcli["Custom_rank"]["List_user"]
+    sr = rName.find_one({"user": user_id})
+    xt = sr["cstm_rank"]
     m = await message.reply_text("Information Processing...")
     try:
         caption, full_caption, photo_id = await get_user(user)
     except Exception as e:
         return await m.edit(str(e))
-    if full_caption is None:
+    if sr is None:
         if not photo_id:
             return await m.edit(info_caption, disable_web_page_preview=True)
         photo = await bot.download_media(photo_id)
