@@ -29,7 +29,7 @@ levelnum = [2,3,4,5,6,7,8,9,10,15,25,35,50,70,100]
      | filters.animation
      | filters.video)
     & filter.chat(G),
-    group=8,
+    group=1,
 )
 async def level(client, message):
     user_id = message.from_user.id
