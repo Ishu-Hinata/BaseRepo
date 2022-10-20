@@ -85,7 +85,7 @@ async def rank(client, message):
         r += 1
         if xpnum["level"] == k["level"]:
             break
-        await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
+    await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
     
 
 @bot.on_message(filters.command("ldb"))
