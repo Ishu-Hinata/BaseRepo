@@ -70,7 +70,11 @@ async def get_user(user, already=False):
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
-   
+    repcli = MongoClient(MONGO_REP_URL) 
+    rName = repcli["Custom_rank"]["List_user"]
+    sr = rName.find_one({"user": user})
+    xt = sr["cstm_rank"]
+    scxt = sr["cstm_rank"] if xt else None
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
@@ -88,18 +92,10 @@ async def get_user(user, already=False):
     for k in rank:
         r += 1
         if xpnum["level"] == k["level"]:
-            break
+            break 
     caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
-👤 {mention}
-   𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
-     
-     ʟᴇᴠᴇʟ: {l}  ʀᴀɴᴋ: {r}
-     ᴇxᴘ:  {fxp}
-"""
-    full_caption = f"""
-    ╔════༻sᴛᴀᴛᴜs༺════╗
-       𝚃𝙸𝚃𝙻𝙴:  {xt}
+       𝚃𝙸𝚃𝙻𝙴:  {scxt}
 
 💠 {mention}
    𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
@@ -107,34 +103,22 @@ async def get_user(user, already=False):
      𝙇𝙀𝙑𝙀𝙇: {l}  ʀᴀɴᴋ: {r}
      ᴇxᴘ:  {fxp}
 """
-    return [caption, full_caption, photo_id]
+    return [caption, photo_id]
 
 @bot.on_message(filters.command("iii"))
 async def info_func(_, message: Message):
     user = message.from_user.id
-    repcli = MongoClient(MONGO_REP_URL) 
-    rName = repcli["Custom_rank"]["List_user"]
-    sr = rName.find_one({"user": user})
-    xt = sr["cstm_rank"]
-    m = await message.reply_text("Information Processing...")
+    m = await message.reply_text("🦋")
     try:
-        caption, full_caption, photo_id = await get_user(user)
+        caption, photo_id = await get_user(user)
     except Exception as e:
         return await m.edit(str(e))
-    if sr is None:
-        if not photo_id:
-            return await m.edit(info_caption, disable_web_page_preview=True)
-        photo = await bot.download_media(photo_id)
-        await message.reply_document(document=photo, caption=caption, quote=False)
-        await m.delete()
-        os.remove(photo)
-    else:
-        if not photo_id:
-            return await m.edit(info_caption, disable_web_page_preview=True)
-        photo = await bot.download_media(photo_id)
-        await message.reply_document(document=photo, caption=full_caption, quote=False)
-        await m.delete()
-        os.remove(photo)
+    if not photo_id:
+        return await m.edit(info_caption, disable_web_page_preview=True)
+    photo = await bot.download_media(photo_id)
+    await message.reply_document(document=photo, caption=caption, quote=False)
+    await m.delete()
+    os.remove(photo)
 
 
 bot.run() 
