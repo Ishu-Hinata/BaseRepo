@@ -36,17 +36,17 @@ levelnum = [2,3,4,5,6,7,8,9,10,15,25,35,50,70,100]
 )
 async def level(client, message):
     user_id = message.from_user.id
-    
+    rtxt = "ㅤ"
     leveldb = MongoClient(MONGO_URL)
-    level = leveldb["TestLvL"]["Tester"]
-    xpnum = level.find_one({"level": user_id})
+    level = leveldb["LEVEL"]["mem_LVL"]
+    xpnum = level.find_one({"USER_ID": user_id})
     if not message.from_user.is_bot:
         if xpnum is None:
-            newxp = {"level": user_id, "xp": 10, "Repu": 0}
+            newxp = {"USER_ID": user_id, "xp": 10, "Repu": 0, "trank" rtxt}
             level.insert_one(newxp)
         else:
             xp = xpnum["xp"] + 1
-            level.update_one({"level": user_id}, {
+            level.update_one({"USER_ID": user_id}, {
                 "$set": {"xp": xp}})
             l = 0
             while True:
@@ -61,25 +61,18 @@ async def level(client, message):
                         await message.reply_video(video=Link, caption=f"⚠️Event!  \n\n❗Level {l} \n\n☯️title: {levelname[lv]}")
 
 
-MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
-
-
-
 async def get_user(user, already=False):
     user = await bot.get_users(user)
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
-    repcli = MongoClient(MONGO_REP_URL) 
-    rName = repcli["Custom_rank"]["List_user"]
-    sr = rName.find_one({"user": user})
-    xt = sr["cstm_rank"] if sr else None
-#    scxt = sr["cstm_rank"] if xt else None
+
     leveldb = MongoClient(MONGO_URL)
-    level = leveldb["TestLvL"]["Tester"]
-    xpnum = level.find_one({"level": user_id})
+    level = leveldb["LEVEL"]["mem_LVL"]
+    xpnum = level.find_one({"USER_ID": user_id})
     xp = xpnum["xp"]
     rp = xpnum["Repu"]
+    cs = xpnum["trank"]
     l = 0
     r = 0
     while True:
@@ -95,7 +88,7 @@ async def get_user(user, already=False):
             break 
     caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
-       𝚃𝙸𝚃𝙻𝙴:  {xt}
+       𝚃𝙸𝚃𝙻𝙴:  {cs}
 💠 {mention}
    𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
      
