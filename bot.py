@@ -98,6 +98,9 @@ async def rok(client, message):
     m = await message.reply_text("❄️")
     try:
         info_caption, photo_id = await get_user_info(user)
+    except Exception as e:
+        return await m.edit(str(e))
+    
     if not photo_id:
         return await m.edit(info_caption, disable_web_page_preview=True)
     photo = await bot.download_media(photo_id)
