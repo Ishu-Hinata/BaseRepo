@@ -60,20 +60,19 @@ async def level(client, message):
                         Link = f"{levellink[lv]}"
                         await message.reply_video(video=Link, caption=f"⚠️Event!  \n\n❗Level {l} \n\n☯️title: {levelname[lv]}")
 
-# txt(f"⚠️level: {l}")
-#text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
-#   MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
-#   repcli = MongoClient(MONGO_REP_URL) 
-#    memDB = repcli["repu_Gainer"]["members"]
-#    k = memDB.find_one({"user": user_id})
-#    t = k["reputation"] if k else None
+
+MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
+repcli = MongoClient(MONGO_REP_URL) 
+rName = repcli["Custom_rank"]["List_user"]
+
 
 async def get_user(user, already=False):
     user = await bot.get_users(user)
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
-    
+    sr = rName.find_one({"user": user_id})
+    xt = sr["cstm_rank"]
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
@@ -81,7 +80,6 @@ async def get_user(user, already=False):
     rp = xpnum["Repu"]
     l = 0
     r = 0
-    a = "ㅤ"
     while True:
         if xp < ((125*(l**2))+(125*(l))):
             break
@@ -94,33 +92,46 @@ async def get_user(user, already=False):
         if xpnum["level"] == k["level"]:
             break
     caption = f"""
-    ╔════༻Status༺════╗
-     💠 {mention}
+    ╔════༻sᴛᴀᴛᴜs༺════╗
+     👤 {mention}
      𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
-        
-     🎖️𝚃𝙸𝚃𝙻𝙴:  {a}
+     
      ʟᴇᴠᴇʟ: {l}  ʀᴀɴᴋ: {r}
-     𝙀𝙓𝙋:  {fxp}
+     ᴇxᴘ:  {fxp}
 """
-
-#    caption = section("𝐂𝐡𝐚𝐭 𝐋𝐞𝐯𝐞𝐥 𝐒𝐭𝐚𝐭𝐬 ⌬", body)
-    return [caption, photo_id]
+    full_caption = f"""
+    ╔════༻sᴛᴀᴛᴜs༺════╗
+     💠 {mention}
+     🎖️𝚃𝙸𝚃𝙻𝙴:  {xt}
+       𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
+     
+     𝙇𝙀𝙑𝙀𝙇: {l}  ʀᴀɴᴋ: {r}
+     ᴇxᴘ:  {fxp}
+"""
+    return [caption, full_caption, photo_id]
 
 @bot.on_message(filters.command("iii"))
 async def info_func(_, message: Message):
     user = message.from_user.id
     m = await message.reply_text("Information Processing...")
     try:
-        info_caption, photo_id = await get_user(user)
+        caption, full_caption, photo_id = await get_user(user)
     except Exception as e:
         return await m.edit(str(e))
-    if not photo_id:
-        return await m.edit(info_caption, disable_web_page_preview=True)
-    photo = await bot.download_media(photo_id)
-
-    await message.reply_document(document=photo, caption=info_caption, quote=False)
-    await m.delete()
-    os.remove(photo)
+    if full_caption is None:
+        if not photo_id:
+            return await m.edit(info_caption, disable_web_page_preview=True)
+        photo = await bot.download_media(photo_id)
+        await message.reply_document(document=photo, caption=caption, quote=False)
+        await m.delete()
+        os.remove(photo)
+    else:
+        if not photo_id:
+            return await m.edit(info_caption, disable_web_page_preview=True)
+        photo = await bot.download_media(photo_id)
+        await message.reply_document(document=photo, caption=full_caption, quote=False)
+        await m.delete()
+        os.remove(photo)
 
 
 bot.run() 
