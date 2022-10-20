@@ -2,7 +2,7 @@ from pyrogram import Client , filters
 
 from pymongo import MongoClient
 import os
-
+from sex import*
 from pyrogram.types import Message
 
 API_ID = os.environ.get("API_ID")
