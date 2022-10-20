@@ -88,7 +88,7 @@ async def get_user(user, already=False):
             break 
     caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
-       𝚃𝙸𝚃𝙻𝙴:  {cs}
+      {cs}
 💠 {mention}
    𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
      
