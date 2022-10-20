@@ -47,10 +47,10 @@ async def level(client, message):
                 "$set": {"xp": xp}})
             l = 0
             while True:
-                if xp < ((50*(l**2))+(50*(l))):
+                if xp < ((250*(l**2))+(250*(l))):
                     break
                 l += 1
-            xp -= ((50*((l-1)**2))+(50*(l-1)))
+            xp -= ((250*((l-1)**2))+(250*(l-1)))
             if xp == 0:
                 for lv in range(len(levelname)) and range(len(levellink)):
                     if l == levelnum[lv]:
@@ -76,30 +76,18 @@ async def rank(client, message):
     l = 0
     r = 0
     while True:
-        if xp < ((50*(l**2))+(50*(l))):
+        if xp < ((250*(l**2))+(250*(l))):
             break
         l += 1
-    xp -= ((50*((l-1)**2))+(50*(l-1)))
+    xp -= ((250*((l-1)**2))+(250*(l-1)))
     rank = level.find().sort("xp", -1)
     for k in rank:
         r += 1
         if xpnum["level"] == k["level"]:
             break
-    await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
+    await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(1000 *((1/2) * l))}\n Ranking: {r}")
     
 
-@bot.on_message(filters.command("ldb"))
-async def levelsystem(_, message): 
-    leveldb = MongoClient(MONGO_URL) 
-    toggle = leveldb["ToggleDb"]["Toggle"]     
-    user = message.from_user.id
-    chat_id = message.chat.id
-    is_level = toggle.find_one({"chat_id": message.chat.id})
-    if not is_level:
-        toggle.insert_one({"chat_id": message.chat.id})
-        await message.reply_text("Level System Enable")
-    else:
-        toggle.delete_one({"chat_id": message.chat.id})
-        await message.reply_text("Level System Disable")
+
 
 bot.run() 
