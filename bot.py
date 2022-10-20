@@ -93,7 +93,7 @@ async def get_user_info(client, message):
         "exp": {int(xp * 4)}/{int(2000 *((1/2) * l))},
         "rank": r,
     }
-    caption = section("User info results", body)
+    caption = body
     return [caption, photo_id]
                                
 @bot.on_message(filters.command("m"))
