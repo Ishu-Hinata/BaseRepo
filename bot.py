@@ -8,7 +8,7 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 MONGO_URL = os.environ.get("MONGO_URL")
 
- G = -1001686630791
+G = -1001686630791
 
 bot = Client(
     "Level" ,
