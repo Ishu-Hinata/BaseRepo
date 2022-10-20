@@ -87,16 +87,17 @@ async def get_user(user, already=False):
         r += 1
         if xpnum["level"] == k["level"]:
             break
-    body = { 
-        "╠》": [mention],
-        "║" a,
-        "╠≛ `Reputation`": a,
-        "╠≛ __Level__": l,
-        "║      ╒__Rank〉 " r,
-        "║      ╘__Exp〉 " fk,
-        "╚══════༻🦋༺═════╝" a,
-    }
-    caption = section("ㅤ╔════༻Status༺════╗", body)
+    body = f"""
+╔════༻Status༺════╗
+╠⌠{[mention]}⌡ 
+║
+╠≛ `Reputation: 0`
+╠≛ __Level {l}__
+║      ╒__Rank〉 {r}__
+║      ╘__Exp〉 {fk}__
+╚══════༻🦋༺═════╝
+""") 
+    caption = body
     return [caption, photo_id]
 
 @bot.on_message(filters.command("iii"))
