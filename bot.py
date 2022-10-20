@@ -109,8 +109,8 @@ async def rok(client, message):
     await m.delete()
     os.remove(photo)
         #f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
-    
 
+async def get_user(user, already=False):
 
 
 bot.run() 
