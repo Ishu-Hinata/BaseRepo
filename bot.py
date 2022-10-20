@@ -88,12 +88,19 @@ async def get_user(user, already=False):
         l += 1
     xp -= ((125*((l-1)**2))+(125*(l-1)))
     rank = level.find().sort("xp", -1)
-    fk = f"{int(xp * 4)}/{int(2000 *((1/2) * l))}"
+    fxp = f"{int(xp * 4)}/{int(2000 *((1/2) * l))}"
     for k in rank:
         r += 1
         if xpnum["level"] == k["level"]:
             break
     body = {
+        "User": mention,
+        "title": a,
+        
+        "Reputation": rp,
+        "level": l,
+        "Rank": r,
+        "EXP": fxp,
     }
     caption = section("𝐂𝐡𝐚𝐭 𝐋𝐞𝐯𝐞𝐥 𝐒𝐭𝐚𝐭𝐬 ⌬", body)
     return [caption, photo_id]
