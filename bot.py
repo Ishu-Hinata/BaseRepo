@@ -91,18 +91,9 @@ async def get_user(user, already=False):
         r += 1
         if xpnum["level"] == k["level"]:
             break
-    body = f"""
-╔════༻Status༺════╗
-╠⌠{mention}⌡ 
-║¦┅ **🎖️Title: **
-║
-╠≛ `Reputation: {t} ⭐`
-╠≛ __Level {l} __
-║      ╒__Rank〉 {r} __
-║      ╘__Exp〉 {fk}__
-╚══════༻🦋༺═════╝
-"""
-    caption = body
+    body = {
+    }
+    caption = section("𝐂𝐡𝐚𝐭 𝐋𝐞𝐯𝐞𝐥 𝐒𝐭𝐚𝐭𝐬 ⌬", body)
     return [caption, photo_id]
 
 @bot.on_message(filters.command("iii"))
