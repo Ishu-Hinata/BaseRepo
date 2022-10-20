@@ -38,6 +38,21 @@ async def level(client, message):
         if xpnum is None:
             newxp = {"level": user_id, "xp": 10}
             level.insert_one(newxp)
+        else:
+            xp = xpnum["xp"] + 1
+            level.update_one({"level": user_id, "chatid": chat}, {
+                "$set": {"xp": xp}})
+            l = 0
+            while True:
+                if xp < ((50*(l**2))+(50*(l))):
+                    break
+                l += 1
+                xp -= ((50*((l-1)**2))+(50*(l-1)))
+                if xp == 0:
+                    for lv in range(len(levelname)) and range(len(levellink)):
+                        if l == levelnum[lv]:
+                            Link = f"{levellink[lv]}"
+                            await message.reply_video(video=Link, caption=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")
 
 
 
