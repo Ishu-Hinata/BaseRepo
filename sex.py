@@ -11,7 +11,7 @@ mono = lambda x: f"`{x}`{n}"
 def section(
     title: str,
     body: dict,
-    indent: int = 2,
+    indent: int = 4,
     underline: bool = False,
 ) -> str:
 
