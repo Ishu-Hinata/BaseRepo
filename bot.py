@@ -115,7 +115,7 @@ async def get_user(user, already=False):
         l += 1
     xp -= ((125*((l-1)**2))+(125*(l-1)))
     rank = level.find().sort("xp", -1)
-    fk = (xp * 4)}/{int(2000 *((1/2) * l))
+    fk = (xp * 4)}/(2000 *((1/2) * l))
     for k in rank:
         r += 1
         if xpnum["level"] == k["level"]:
