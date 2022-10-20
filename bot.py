@@ -95,7 +95,7 @@ async def rank(client, message):
                                
 @bot.on_message(filters.command("m"))
 async def rok(client, message):
-    m = await await message.reply_text("❄️")
+    m = await message.reply_text("❄️")
     try:
         info_caption, photo_id = await get_user_info(user)
     if not photo_id:
