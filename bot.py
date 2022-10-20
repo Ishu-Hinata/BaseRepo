@@ -135,7 +135,7 @@ async def info_func(_, message: Message):
         return await m.edit(info_caption, disable_web_page_preview=True)
     photo = await bot.download_media(photo_id)
 
-    await message.reply_file(file=photo, caption=info_caption, quote=False)
+    await message.reply_document(document=photo, caption=info_caption, quote=False)
     await m.delete()
     os.remove(photo)
 
