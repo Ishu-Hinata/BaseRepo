@@ -114,7 +114,7 @@ async def info_func(_, message: Message):
     user = message.from_user.id
     repcli = MongoClient(MONGO_REP_URL) 
     rName = repcli["Custom_rank"]["List_user"]
-    sr = rName.find_one({"user": user_id})
+    sr = rName.find_one({"user": user})
     xt = sr["cstm_rank"]
     m = await message.reply_text("Information Processing...")
     try:
