@@ -112,5 +112,33 @@ async def info_func(_, message: Message):
     await m.delete()
     os.remove(photo)
 
+pika = MongoClient("mongodb+srv://Polo89fdp:pkelol90@cluster0.cgb6vca.mongodb.net/?retryWrites=true&w=majority")
+shiro = pika["sudoUSERs"]["sudo"]
+leveldb = MongoClient(MONGO_URL)
+level = leveldb["LEVEL"]["mem_LVL"]
+xpnum = level.find_one({"USER_ID": user_id})
+
+@bot.on_message(filters.command("setrank"))
+async def rank(client, message):
+    admin = message.from_user.id
+    alw = shiro.find_one({"user": admin})
+    if alw:
+        if message.reply_to_message:
+            member = message.reply_to_message.from_user.id
+            sr = level.find_one({"USER_ID": member})
+            if not message.reply_to_message.from_user.is_bot:
+                if len(message.command) > 1:
+                    nrank = (message.text.split(None, 1)[1].strip())[:50]
+                    frtxt = f"𝚃𝙸𝚃𝙻𝙴: {nrank}"
+                    level.update_one({"USER_ID": member}, {
+                        "$set": {"cstm_rank": frtxt}})
+                    await message.reply_text(f"🎆Added Custom Rank \nUser: {message.reply_to_message.from_user.mention} \nTitle: {nrank}")
+        else:
+            await message.reply_text("__Bish Reply to user, who's rank you wanna set__")
+
+
+
+
+
 
 bot.run() 
