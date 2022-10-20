@@ -47,16 +47,7 @@ async def level(client, message):
                 "$set": {"xp": xp}})
             l = 0
             while True:
-                if xp < ((250*(l**2))+(250*(l))):
-                    break
-                l += 1
-                xp -= ((250*((l-1)**2))+(250*(l-1)))
-                if xp == 0:
-                    for lv in range(len(levelname)) and range(len(levellink)):
-                        if l == levelnum[lv]:
-                            Link = f"{levellink[lv]}"
-                            await message.reply_video(video=Link, caption=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")
-
+                
 
 
 
@@ -77,18 +68,7 @@ async def rank(client, message):
     l = 0
     r = 0
     while True:
-        if xp < ((250*(l**2))+(250*(l))):
-            break
-        l += 1
-    xp -= ((250*((l-1)**2))+(250*(l-1)))
-    rank = level.find().sort("xp", -1)
-    for k in rank:
-        r += 1
-        if xpnum["level"] == k["level"]:
-            break
-    await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
-
-    
+        
     
 
 @bot.on_message(filters.command("ldb"))
