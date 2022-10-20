@@ -102,7 +102,7 @@ async def get_user(user, already=False):
     user = await bot.get_users(user)
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
-
+    user_id = user.id
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
