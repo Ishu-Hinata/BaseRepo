@@ -107,9 +107,24 @@ async def get_user(user, already=False):
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
     xp = xpnum["xp"]
+    l = 0
+    r = 0
+    while True:
+        if xp < ((125*(l**2))+(125*(l))):
+            break
+        l += 1
+    xp -= ((125*((l-1)**2))+(125*(l-1)))
+    rank = level.find().sort("xp", -1)
+    for k in rank:
+        r += 1
+        if xpnum["level"] == k["level"]:
+            break
     body = { 
-        "✪ Mention": [mention],
+        "✪": [mention],
         "Eexp": xp,
+        "Level": l,
+        "Rank": r,
+        "F Xp": {int(xp * 4)}/{int(2000 *((1/2) * l))},
     }
     caption = section("User info results", body)
     return [caption, photo_id]
