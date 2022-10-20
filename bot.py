@@ -8,7 +8,7 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 MONGO_URL = os.environ.get("MONGO_URL")
 
- 
+ G = -1001686630791
 
 bot = Client(
     "Level" ,
@@ -28,15 +28,15 @@ levelnum = [2,3,4,5,6,7,8,9,10,15,25,35,50,70,100]
      | filters.sticker
      | filters.animation
      | filters.video)
-    & ~filters.private,
+    & filter.chat(G),
     group=8,
 )
 async def level(client, message):
     user_id = message.from_user.id
-    xpnum = level.find_one({"level": user_id})
+    
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
-    
+    xpnum = level.find_one({"level": user_id})
     if not message.from_user.is_bot:
         if xpnum is None:
             newxp = {"level": user_id, "xp": 10}
