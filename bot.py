@@ -94,9 +94,9 @@ async def get_user(user, already=False):
     body = f"""
 ╔════༻Status༺════╗
 ╠⌠{mention}⌡ 
-║¦┅ **🎖️Title: {xt}**
+║¦┅ **🎖️Title: **
 ║
-╠≛ `Reputation:  ⭐`
+╠≛ `Reputation: {t} ⭐`
 ╠≛ __Level {l} __
 ║      ╒__Rank〉 {r} __
 ║      ╘__Exp〉 {fk}__
