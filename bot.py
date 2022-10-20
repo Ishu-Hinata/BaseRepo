@@ -47,10 +47,10 @@ async def level(client, message):
                 "$set": {"xp": xp}})
             l = 0
             while True:
-                if xp < ((250*(l**3))+(250*(l))):
+                if xp < ((250*(l**2))+(250*(l))):
                     break
                 l += 1
-                xp -= ((250*((l-1)**3))+(250*(l-1)))
+                xp -= ((250*((l-1)**2))+(250*(l-1)))
                 if xp == 0:
                     for lv in range(len(levelname)) and range(len(levellink)):
                         if l == levelnum[lv]:
@@ -77,10 +77,10 @@ async def rank(client, message):
     l = 0
     r = 0
     while True:
-        if xp < ((250*(l**3))+(250*(l))):
+        if xp < ((250*(l**2))+(250*(l))):
             break
         l += 1
-    xp -= ((250*((l-1)**3))+(250*(l-1)))
+    xp -= ((250*((l-1)**2))+(250*(l-1)))
     rank = level.find().sort("xp", -1)
     for k in rank:
         r += 1
