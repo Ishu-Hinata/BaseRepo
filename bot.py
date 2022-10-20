@@ -42,7 +42,7 @@ async def level(client, message):
     xpnum = level.find_one({"level": user_id})
     if not message.from_user.is_bot:
         if xpnum is None:
-            newxp = {"level": user_id, "xp": 10}
+            newxp = {"level": user_id, "xp": 10, "Repu": 0}
             level.insert_one(newxp)
         else:
             xp = xpnum["xp"] + 1
@@ -62,21 +62,23 @@ async def level(client, message):
 
 # txt(f"⚠️level: {l}")
 #text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
-MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
+#   MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
+#   repcli = MongoClient(MONGO_REP_URL) 
+#    memDB = repcli["repu_Gainer"]["members"]
+#    k = memDB.find_one({"user": user_id})
+#    t = k["reputation"] if k else None
 
 async def get_user(user, already=False):
     user = await bot.get_users(user)
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
-    repcli = MongoClient(MONGO_REP_URL) 
-    memDB = repcli["repu_Gainer"]["members"]
-    k = memDB.find_one({"user": user_id})
-    t = k["reputation"] if k else None
+    
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
     xp = xpnum["xp"]
+    rp = xpnum["Repu"]
     l = 0
     r = 0
     a = "ㅤ"
