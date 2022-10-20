@@ -8,7 +8,7 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 MONGO_URL = os.environ.get("MONGO_URL")
 leveldb = MongoClient(MONGO_URL)
-level = leveldb["LevelDb"]["Level"] 
+level = leveldb["TestLvL"]["Tester"] 
 
 bot = Client(
     "Level" ,
