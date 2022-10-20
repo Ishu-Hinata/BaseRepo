@@ -87,6 +87,7 @@ async def rank(client, message):
 
                                
 @bot.on_message(filters.command("m"))
+async def rok(client, message):
     await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
     
 
