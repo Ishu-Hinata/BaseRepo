@@ -76,7 +76,16 @@ async def rank(client, message):
     l = 0
     r = 0
     while True:
-        
+        if xp < ((50*(l**2))+(50*(l))):
+            break
+        l += 1
+    xp -= ((50*((l-1)**2))+(50*(l-1)))
+    rank = level.find().sort("xp", -1)
+    for k in rank:
+        r += 1
+        if xpnum["level"] == k["level"]:
+            break
+        await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
     
 
 @bot.on_message(filters.command("ldb"))
