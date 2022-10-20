@@ -64,9 +64,7 @@ async def level(client, message):
 # txt(f"⚠️level: {l}")
     
 #text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
-       
-                               
-@bot.on_message(filters.command("m"))
+
 async def rank(client, message):
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
@@ -85,6 +83,10 @@ async def rank(client, message):
         r += 1
         if xpnum["level"] == k["level"]:
             break
+
+
+                               
+@bot.on_message(filters.command("m"))
     await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
     
 
