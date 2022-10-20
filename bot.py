@@ -65,7 +65,7 @@ async def level(client, message):
     
 #text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
 
-async def rank(client, message):
+async def get_user_info(client, message):
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     user_id = message.from_user.id
