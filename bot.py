@@ -94,13 +94,13 @@ async def get_user(user, already=False):
         if xpnum["level"] == k["level"]:
             break
     body = {
-        "User": mention,
-        "title": a,
+        "✰": mention,
+        "𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯": rp,
         
-        "Reputation": rp,
-        "level": l,
-        "Rank": r,
-        "EXP": fxp,
+        "𝚃𝙸𝚃𝙻𝙴": a,
+        "ʟᴇᴠᴇʟ": l, "ʀᴀɴᴋ": r,
+        
+        "𝙀𝙓𝙋": fxp,
     }
     caption = section("𝐂𝐡𝐚𝐭 𝐋𝐞𝐯𝐞𝐥 𝐒𝐭𝐚𝐭𝐬 ⌬", body)
     return [caption, photo_id]
