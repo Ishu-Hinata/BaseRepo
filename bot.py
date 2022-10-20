@@ -89,14 +89,14 @@ async def get_user(user, already=False):
             break
     body = { 
         "╠》": [mention],
-        "║": a,
-        "╠≛ `Reputation`:": a,
-        "╠≛ __Level__:": l,
-        "║      ╒__Rank〉 ": r,
-        "║      ╘__Exp〉 ": fk,
-        "╚══════༻🦋༺═════╝": a,
+        "║" a,
+        "╠≛ `Reputation`": a,
+        "╠≛ __Level__": l,
+        "║      ╒__Rank〉 " r,
+        "║      ╘__Exp〉 " fk,
+        "╚══════༻🦋༺═════╝" a,
     }
-    caption = section(" ╔════༻Status༺════╗", body)
+    caption = section("ㅤ╔════༻Status༺════╗", body)
     return [caption, photo_id]
 
 @bot.on_message(filters.command("iii"))
