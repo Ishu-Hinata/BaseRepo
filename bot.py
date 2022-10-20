@@ -125,7 +125,7 @@ async def get_user(user, already=False):
         "Eexp": xp,
         "Level": l,
         "Rank": r,
-        "F Xp": fx,
+        "F Xp": fk,
     }
     caption = section("User info results", body)
     return [caption, photo_id]
