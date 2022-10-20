@@ -68,7 +68,9 @@ async def level(client, message):
 async def rank(client, message):
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
-    user_id = message.from_user.id    
+    user_id = message.from_user.id
+    user = await bot.get_users(client)
+    photo_id = user.photo.big_file_id if user.photo else None
     xpnum = level.find_one({"level": user_id})
     xp = xpnum["xp"]
     l = 0
@@ -83,12 +85,26 @@ async def rank(client, message):
         r += 1
         if xpnum["level"] == k["level"]:
             break
-
-
+    body = {
+        "level": l,
+        "exp": {int(xp * 4)}/{int(2000 *((1/2) * l))},
+        "rank": r,
+    }
+    caption = section("User info results", body)
+    return [caption, photo_id]
                                
 @bot.on_message(filters.command("m"))
 async def rok(client, message):
-    await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
+    m = await await message.reply_text("❄️")
+    try:
+        info_caption, photo_id = await get_user_info(user)
+    if not photo_id:
+        return await m.edit(info_caption, disable_web_page_preview=True)
+    photo = await bot.download_media(photo_id)
+    await message.reply_photo(photo, caption=info_caption, quote=False)
+    await m.delete()
+    os.remove(photo)
+        #f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
     
 
 
