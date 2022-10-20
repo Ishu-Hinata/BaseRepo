@@ -119,8 +119,22 @@ async def get_user(user, already=False):
     }
     caption = section("User info results", body)
     return [caption, photo_id]
-@bot.on_message(filters.command("i
 
-"))
+@bot.on_message(filters.command("i"))
+async def info_func(_, message: Message):
+    user = message.from_user.id
+    m = await message.reply_text("Information Processing...")
+    try:
+        info_caption, photo_id = await get_user(user)
+    except Exception as e:
+        return await m.edit(str(e))
+    if not photo_id:
+        return await m.edit(info_caption, disable_web_page_preview=True)
+    photo = await bot.download_media(photo_id)
+
+    await message.reply_photo(photo, caption=info_caption, quote=False)
+    await m.delete()
+    os.remove(photo)
+
 
 bot.run() 
