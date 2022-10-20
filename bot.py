@@ -95,6 +95,7 @@ async def get_user_info(client, message):
                                
 @bot.on_message(filters.command("m"))
 async def rok(client, message):
+    user = message.from_user.id
     m = await message.reply_text("❄️")
     try:
         info_caption, photo_id = await get_user_info(user)
