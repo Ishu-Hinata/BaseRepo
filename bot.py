@@ -69,6 +69,11 @@ async def get_user(user, already=False):
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
+    repcli = MongoClient(MONGO_REP_URL) 
+    memDB = repcli["repu_Gainer"]["members"]
+    k = memDB.find_one({"user": user_id})
+    t = k["reputation"]
+    frr = if t else None
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
@@ -89,11 +94,12 @@ async def get_user(user, already=False):
             break
     body = f"""
 ╔════༻Status༺════╗
-╠⌠{[mention]}⌡ 
+╠⌠{mention}⌡ 
+║¦┅ **🎖️Title: {xt}**
 ║
-╠≛ `Reputation: 0`
-╠≛ __Level {l}__
-║      ╒__Rank〉 {r}__
+╠≛ `Reputation:  ⭐`
+╠≛ __Level {l} __
+║      ╒__Rank〉 {r} __
 ║      ╘__Exp〉 {fk}__
 ╚══════༻🦋༺═════╝
 """
