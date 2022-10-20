@@ -115,6 +115,7 @@ async def get_user(user, already=False):
         l += 1
     xp -= ((125*((l-1)**2))+(125*(l-1)))
     rank = level.find().sort("xp", -1)
+    fk = (xp * 4)}/{int(2000 *((1/2) * l))
     for k in rank:
         r += 1
         if xpnum["level"] == k["level"]:
@@ -124,7 +125,7 @@ async def get_user(user, already=False):
         "Eexp": xp,
         "Level": l,
         "Rank": r,
-        "F Xp": {int(xp * 4)}/{int(2000 *((1/2) * l))},
+        "F Xp": fx,
     }
     caption = section("User info results", body)
     return [caption, photo_id]
