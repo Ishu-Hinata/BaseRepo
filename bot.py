@@ -62,7 +62,7 @@ async def level(client, message):
 
 # txt(f"⚠️level: {l}")
 #text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
-
+MONGO_REP_URL = "mongodb+srv://yumtes0r:learn09yu@cluster0.nvey7em.mongodb.net/?retryWrites=true&w=majority"
 
 async def get_user(user, already=False):
     user = await bot.get_users(user)
