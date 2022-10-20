@@ -84,7 +84,7 @@ async def get_user(user, already=False):
     fxp = f"{int(xp * 4)}/{int(2000 *((1/2) * l))}"
     for k in rank:
         r += 1
-        if xpnum["level"] == k["level"]:
+        if xpnum["USER_ID"] == k["USER_ID"]:
             break 
     caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
