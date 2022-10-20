@@ -116,7 +116,6 @@ pika = MongoClient("mongodb+srv://Polo89fdp:pkelol90@cluster0.cgb6vca.mongodb.ne
 shiro = pika["sudoUSERs"]["sudo"]
 leveldb = MongoClient(MONGO_URL)
 level = leveldb["LEVEL"]["mem_LVL"]
-xpnum = level.find_one({"USER_ID": user_id})
 
 @bot.on_message(filters.command("setrank"))
 async def rank(client, message):
