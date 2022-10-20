@@ -70,11 +70,11 @@ async def get_user(user, already=False):
     mention = user.mention
     photo_id = user.photo.big_file_id if user.photo else None
     user_id = user.id
-    repcli = MongoClient(MONGO_REP_URL) 
-    rName = repcli["Custom_rank"]["List_user"]
-    sr = rName.find_one({"user": user})
-    xt = sr["cstm_rank"]
-    scxt = sr["cstm_rank"] if xt else None
+#    repcli = MongoClient(MONGO_REP_URL) 
+#    rName = repcli["Custom_rank"]["List_user"]
+#    sr = rName.find_one({"user": user})
+#    xt = sr["cstm_rank"]
+#    scxt = sr["cstm_rank"] if xt else None
     leveldb = MongoClient(MONGO_URL)
     level = leveldb["TestLvL"]["Tester"]
     xpnum = level.find_one({"level": user_id})
@@ -95,7 +95,6 @@ async def get_user(user, already=False):
             break 
     caption = f"""
     ╔════༻sᴛᴀᴛᴜs༺════╗
-       𝚃𝙸𝚃𝙻𝙴:  {scxt}
 
 💠 {mention}
    𝘙𝘦𝘱𝘶𝘵𝘢𝘵𝘪𝘰𝘯: {rp} ✰
