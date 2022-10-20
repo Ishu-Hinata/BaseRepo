@@ -111,6 +111,16 @@ async def rok(client, message):
         #f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {int(xp * 4)}/{int(2000 *((1/2) * l))}\n Ranking: {r}")
 
 async def get_user(user, already=False):
+    user = await bot.get_users(user)
+    mention = user.mention("Link")
+    photo_id = user.photo.big_file_id if user.photo else None
+    body = { 
+        "✪ Mention": [mention],
+    }
+    caption = section("User info results", body)
+    return [caption, photo_id]
+@bot.on_message(filters.command("i
 
+"))
 
 bot.run() 
