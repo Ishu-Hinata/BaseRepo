@@ -120,7 +120,7 @@ async def get_user(user, already=False):
     body = { 
         "✪ Mention": [mention],
     }
-    caption = section("User info results", body)
+    caption = body
     return [caption, photo_id]
 
 @bot.on_message(filters.command("i"))
