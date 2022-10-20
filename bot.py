@@ -43,7 +43,7 @@ async def level(client, message):
             level.insert_one(newxp)
         else:
             xp = xpnum["xp"] + 1
-            level.update_one({"level": user_id, "chatid": chat}, {
+            level.update_one({"level": user_id}, {
                 "$set": {"xp": xp}})
             l = 0
             while True:
@@ -67,34 +67,29 @@ async def level(client, message):
 #text=f"⚠️Event! \n❗Level {l} \n☯️title: {levelname[lv]}")          
        
                                
-@bot.on_message(filters.command("lvl"))
+@bot.on_message(filters.command("m"))
 async def rank(client, message):
-    chat = message.chat.id
+    leveldb = MongoClient(MONGO_URL)
+    level = leveldb["LevelDb"]["Level"] 
     user_id = message.from_user.id    
+    xpnum = level.find_one({"level": user_id})
+    xp = xpnum["xp"]
+    l = 0
+    r = 0
+    while True:
+        if xp < ((50*(l**2))+(50*(l))):
+            break
+        l += 1
+    xp -= ((50*((l-1)**2))+(50*(l-1)))
+    rank = level.find().sort("xp", -1)
+    for k in rank:
+        r += 1
+        if xpnum["level"] == k["level"]:
+            break
+    await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
+
     
     
-    toggle = leveldb["ToggleDb"]["Toggle"] 
-
-    is_level = toggle.find_one({"chat_id": message.chat.id})
-    if is_level:
-        xpnum = level.find_one({"level": user_id, "chatid": chat})
-        xp = xpnum["xp"]
-        l = 0
-        r = 0
-        while True:
-            if xp < ((50*(l**2))+(50*(l))):
-                break
-            l += 1
-
-        xp -= ((50*((l-1)**2))+(50*(l-1)))
-        rank = level.find().sort("xp", -1)
-        for k in rank:
-            r += 1
-            if xpnum["level"] == k["level"]:
-                break                     
-        await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
-
-
 
 @bot.on_message(filters.command("ldb"))
 async def levelsystem(_, message): 
