@@ -33,7 +33,7 @@ async def rank(client, message):
 #        users = await bot.get_users(x['USER_ID'])
     await message.reply_text(dt1)
 
-@bot.on_message(filters.command("top2"S))
+@bot.on_message(filters.command("top2"))
 async def rank(client, message):
     tl = level.find().sort("xp")
     dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
