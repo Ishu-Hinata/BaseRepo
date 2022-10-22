@@ -1,9 +1,7 @@
 from pyrogram import Client , filters
-
+import pymongo
 from pymongo import MongoClient
 import os
-from sex import*
-
 
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
@@ -24,10 +22,56 @@ bot = Client(
 async def rank(client, message):
     await message.reply_text(f"🎆Added")
 
-#all codes deleted
+leveldb = MongoClient(MONGO_URL)
+level = leveldb["LEVEL"]["mem_LVL"]
 
-# repo only fir testing
+@bot.on_message(filters.command("top1", configg.PREFIXES))
+async def rank(client, message):
+    tl = level.find().sort("xp")
+    dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
+#    for x in dt1:
+#        users = await bot.get_users(x['USER_ID'])
+    await message.reply_text(dt1)
 
-#   @lord_DSP_3
+@bot.on_message(filters.command("top2", configg.PREFIXES))
+async def rank(client, message):
+    tl = level.find().sort("xp")
+    dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
+    texto = "🏆 TOP 25 PLAYERS 🏆"
+    num = 0
+    for x in dt1:
+        users = await bot.get_users(x['USER_ID'])
+        if users.mention:
+           data = users.mention
+        else:
+           data = x['USER_ID']
+           num =+ 1
+           texto += f"{num}》{data}\n"
+           await message.reply_text(texto)
+
+#@bot.on_message(filters.command("top3", configg.PREFIXES))
+#async def rank(client, message):
+#    tl = level.find().sort('xp')
+#    dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
+#    texto = "🏆 TOP 10 PLAYERS 🏆"
+#    num = 0
+#    for x in dt1:
+#        num += 1
+#        users = await bot.get_users(x['USER_ID'])
+#        if users.mention:
+#           data = users.mention
+#        else:
+#           data = x['USER_ID']
+#           texto += f"{num}》{data}\n"
+#           await message.reply_text(texto)
+
+
+
+
+#
+
+# repo only for testing
+
+#
 
 bot.run() 
