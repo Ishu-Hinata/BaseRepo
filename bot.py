@@ -45,9 +45,9 @@ async def rank(client, message):
         num += 1
         texto += f"{num}》{mention}\n"
         try:
-            await message.reply_text(texto)
+           await message.reply_text(texto)
         except Exception as e:
-            await message.reply_text(f"`{e}`")
+           await message.reply_text(f"`{e}`")
 
 #@bot.on_message(filters.command("top3", configg.PREFIXES))
 #async def rank(client, message):
