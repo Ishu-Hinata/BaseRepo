@@ -41,13 +41,13 @@ async def rank(client, message):
     num = 0
     for x in dt1:
         users = await bot.get_users(x['USER_ID'])
-        if users.mention:
-           data = users.mention
-        else:
-           data = x['USER_ID']
-           num =+ 1
-           texto += f"{num}》{data}\n"
-           await message.reply_text(texto)
+        mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
+        num += 1
+        texto += f"{num}》{mention}\n"
+        try:
+            await message.reply_text(texto)
+        except Exception as e:
+            await message.reply_text(f"`{e}`")
 
 #@bot.on_message(filters.command("top3", configg.PREFIXES))
 #async def rank(client, message):
@@ -57,7 +57,10 @@ async def rank(client, message):
 #    num = 0
 #    for x in dt1:
 #        num += 1
-#        users = await bot.get_users(x['USER_ID'])
+         try: 
+#           users = await bot.get_users(x['USER_ID'])
+         except Exception:
+            
 #        if users.mention:
 #           data = users.mention
 #        else:
