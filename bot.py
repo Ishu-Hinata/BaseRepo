@@ -57,9 +57,9 @@ async def rank(client, message):
 #    num = 0
 #    for x in dt1:
 #        num += 1
-         try: 
+#         try: 
 #           users = await bot.get_users(x['USER_ID'])
-         except Exception:
+ #        except Exception:
             
 #        if users.mention:
 #           data = users.mention
