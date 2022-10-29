@@ -26,7 +26,7 @@ leveldb = MongoClient(MONGO_URL)
 level = leveldb["LEVEL"]["mem_LVL"]
 
 
-@bot.on_message(filters.command("top2"))
+@bot.on_message(filters.command("top2") & filter.chats(G))
 async def rank(client, message):
     tl = level.find().sort("xp")
     dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
