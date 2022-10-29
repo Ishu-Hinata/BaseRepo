@@ -36,7 +36,7 @@ async def rank(client, message):
         users = await bot.get_users(x['USER_ID'])
         mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
         num += 1
-        xp = xpnum["xp"]
+        xp = dt1["xp"]
         l = 0
         while True:
             if xp < ((125*(l**2))+(125*(l))):
