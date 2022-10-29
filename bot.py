@@ -30,7 +30,7 @@ level = leveldb["LEVEL"]["mem_LVL"]
 async def rank(client, message):
     tl = level.find().sort("xp")
     dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
-    texto = "🏆 TOP 25 PLAYERS 🏆"
+    texto = "🏆 TOP 10 PLAYERS 🏆\n\n"
     num = 0
     for x in dt1:
         users = await bot.get_users(x['USER_ID'])
