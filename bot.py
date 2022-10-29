@@ -25,56 +25,39 @@ async def rank(client, message):
 leveldb = MongoClient(MONGO_URL)
 level = leveldb["LEVEL"]["mem_LVL"]
 
-@bot.on_message(filters.command("top1"))
-async def rank(client, message):
-    tl = level.find().sort("xp")
-    dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
-#    for x in dt1:
-#        users = await bot.get_users(x['USER_ID'])
-    await message.reply_text(dt1)
 
 @bot.on_message(filters.command("top2"))
 async def rank(client, message):
     tl = level.find().sort("xp")
     dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
-    texto = "**🏆 TOP 25 PLAYERS 🏆**\n\n"
+    texto = "🏆 TOP 25 PLAYERS 🏆"
     num = 0
     for x in dt1:
         users = await bot.get_users(x['USER_ID'])
         mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
         num += 1
-        texto += f"{num}》{mention}\n"
+        xp = xpnum["xp"]
+        l = 0
+        while True:
+            if xp < ((125*(l**2))+(125*(l))):
+                break
+            l += 1
+        xp -= ((125*((l-1)**2))+(125*(l-1)))
+        fxp = f"{int(xp * 4)}/{int(2000 *((1/2) * l))}"
+        texto += f"{num}》{mention} {l} ~ {fxp}\n"
         try:
            await message.reply_text(texto)
         except Exception as e:
            await message.reply_text(f"`{e}`")
 
-#@bot.on_message(filters.command("top3", configg.PREFIXES))
-#async def rank(client, message):
-#    tl = level.find().sort('xp')
-#    dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
-#    texto = "🏆 TOP 10 PLAYERS 🏆"
-#    num = 0
-#    for x in dt1:
-#        num += 1
-#         try: 
-#           users = await bot.get_users(x['USER_ID'])
- #        except Exception:
-            
-#        if users.mention:
-#           data = users.mention
-#        else:
-#           data = x['USER_ID']
-#           texto += f"{num}》{data}\n"
-#           await message.reply_text(texto)
 
 
 
 
-#
-
-# repo only for testing
-
-#
+@bot.on_message(filters.command("top1"))
+async def rank(client, message):
+    tl = level.find().sort("xp")
+    dt1 = [x for x in level.find().sort('xp',pymongo.DESCENDING)][:10]
+    await message.reply_text(dt1)
 
 bot.run() 
