@@ -33,12 +33,6 @@ async def rank(client, message):
     texto = "🏆 TOP 10 PLAYERS 🏆\n\n"
     num = 0
     for x in dt1:
-        try:
-            users = await bot.get_users(x['USER_ID'])
-            mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
-        except Exception:
-            mention = x['USER_ID']
-        num += 1
         xp = x["xp"]
         l = 0
         while True:
@@ -47,6 +41,12 @@ async def rank(client, message):
             l += 1
         xp -= ((125*((l-1)**2))+(125*(l-1)))
         fxp = f"{int(xp * 4)}/{int(2000 *((1/2) * l))}"
+        try:
+            users = await bot.get_users(x['USER_ID'])
+            mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
+        except Exception:
+            mention = x['USER_ID']
+        num += 1
         texto += f"{num}》{mention} {l} ~ {fxp}\n"
         try:
            await message.reply_text(texto)
