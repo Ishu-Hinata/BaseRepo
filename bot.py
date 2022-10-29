@@ -33,8 +33,11 @@ async def rank(client, message):
     texto = "🏆 TOP 10 PLAYERS 🏆\n\n"
     num = 0
     for x in dt1:
-        users = await bot.get_users(x['USER_ID'])
-        mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
+        try:
+            users = await bot.get_users(x['USER_ID'])
+            mention = "[" + users.first_name + "](tg://user?id=" + str(users.id) + ")" or users.first_name
+        except Exception:
+            mention = x['USER_ID']
         num += 1
         xp = x["xp"]
         l = 0
