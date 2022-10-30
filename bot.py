@@ -48,10 +48,7 @@ async def rank(client, message):
             mention = x['USER_ID']
         num += 1
         texto += f"{num}》{mention} (ʟᴠʟ: {l} ⟐ ᴇxᴘ: {fxp})\n"
-        try:
-           await message.reply_text(texto)
-        except Exception as e:
-           await message.reply_text(f"`{e}`")
+    await message.reply_text(texto)
 
 
 
