@@ -26,6 +26,7 @@ async def welcome(_, m: Message):
         unm = m.from_user.username
         msg = await bot.send_photo(G, photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
         await bot.restrict_chat_member(G, im, ChatPermissions(can_send_messages=True, can_invite_users=True, can_send_polls=True, can_send_other_messages=False, can_send_media_messages=False))
+        await asyncio.sleep(60)
         await msg.delete()
 
 @bot.on_message(filters.command("start") & filters.private)
