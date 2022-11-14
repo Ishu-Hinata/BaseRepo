@@ -28,7 +28,7 @@ async def welcome(bot, m: Message):
         await asyncio.sleep(10)
         msg = await bot.send_photo(G, photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
 
-@bot.on_message(filters.new_chat_members & filters.chat(G))
+@bot.on_message(filters.command("r") & filters.chat(G))
 async def welcome(bot, m: Message):
     await message.reply_text("!bot reloaded")
 
