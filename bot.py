@@ -21,7 +21,7 @@ bot = Client(
 Pic = "https://telegra.ph/file/59c987c5c838e973e8d3f.jpg"
 
 @bot.on_message(filters.new_chat_members & filters.chat(G))
-async def welcome(bot, message):
+async def new(bot, message):
         im = message.from_user.id
         nm = message.from_user.mention
         unm = message.from_user.username
@@ -30,15 +30,15 @@ async def welcome(bot, message):
         msg = await bot.send_photo(G, photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
 
 @bot.on_message(filters.command("r") & filters.chat(G))
-async def welcome(bot, message):
+async def rel(bot, message):
     await message.reply_text("!bot reloaded")
 
 @bot.on_message(filters.command("start") & filters.private)
-async def ping(bot, message):
+async def start(bot, message):
     await message.reply_text("Pretty much nothing for Normies \n Join @Anime_Gaming_Chat_Global")
 
 @bot.on_message(filters.command("settings") & filters.private)
-async def ping(bot, message):
+async def settings(bot, message):
     uid = message.from_user.id
     mystic = await message.reply_text("Getting User Unique id...")
     await asyncio.sleep(1)
@@ -51,3 +51,4 @@ async def ping(bot, message):
 ##okok 
 
 bot.run() 
+idle()
