@@ -19,6 +19,19 @@ bot = Client(
 
 Pic = "https://telegra.ph/file/59c987c5c838e973e8d3f.jpg"
 
+@bot.on_message(filters.new_chat_members)
+async def new(bot, message):
+        im = message.from_user.id
+        nm = message.from_user.mention
+        unm = message.from_user.username
+        msg = await message.reply_photo(photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
+
+
+
+
+
+
+
 @bot.on_message(filters.command("r"))
 async def rel(bot, message):
     await message.reply_text("!bot reloaded")
