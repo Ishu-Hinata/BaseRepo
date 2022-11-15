@@ -48,5 +48,6 @@ async def ping(bot, message):
     await asyncio.sleep(1)
     await mystic.edit("⚠️Only Authorised Users Can use This command")
 
+##okok 
 
 bot.run() 
