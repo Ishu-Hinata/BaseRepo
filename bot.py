@@ -9,7 +9,6 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 #MONGO_URL = os.environ.get("MONGO_URL")
 
-G = -1001525634215
 
 bot = Client(
     "Level" ,
@@ -20,16 +19,16 @@ bot = Client(
 
 Pic = "https://telegra.ph/file/59c987c5c838e973e8d3f.jpg"
 
-@bot.on_message(filters.new_chat_members & filters.chat(G))
+@bot.on_message(filters.new_chat_members)
 async def new(bot, message):
         im = message.from_user.id
         nm = message.from_user.mention
         unm = message.from_user.username
-        await bot.restrict_chat_member(G, im, ChatPermissions(can_send_messages=True, can_invite_users=True, can_send_polls=True, can_send_other_messages=False, can_send_media_messages=False))
+        await bot.restrict_chat_member(message.chat.id, im, ChatPermissions(can_send_messages=True, can_invite_users=True, can_send_polls=True, can_send_other_messages=False, can_send_media_messages=False))
         await asyncio.sleep(10)
-        msg = await bot.send_photo(G, photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
+        msg = await message.reply_photo(photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
 
-@bot.on_message(filters.command("r") & filters.chat(G))
+@bot.on_message(filters.command("r"))
 async def rel(bot, message):
     await message.reply_text("!bot reloaded")
 
