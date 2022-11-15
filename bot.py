@@ -1,4 +1,4 @@
-from pyrogram import Client , filters
+from pyrogram import Client , filters, idle
 from pyrogram.types import Message, ChatPermissions
 import asyncio
 import os
