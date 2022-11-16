@@ -48,9 +48,9 @@ async def remove_background(bot, update):
             reply_markup=ERROR_BUTTONS
         )
         return
-    await update.reply_text("typing")
+#    await update.reply_text("typing")
     message = await update.reply_text(
-        text="Processing",
+        text="Processing....",
         quote=True,
         disable_web_page_preview=True
     )
@@ -98,7 +98,7 @@ async def remove_background(bot, update):
     try:
         with open(new_file_name, "wb") as file:
             file.write(new_document.content)
-        await update.reply_text("upload_document")
+#        await update.reply_text("upload_document")
     except Exception as error:
         await message.edit_text(
            text=error,
