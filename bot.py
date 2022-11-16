@@ -7,9 +7,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_ID = os.environ.get("API_ID")
-API_HASH = os.environ.get("API_HASH")
+API_ID = 9855603
+API_HASH = "95d8b38bbb62d087dbf7b98abf670e78"
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+REMOVEBG_API = os.environ.get("REMOVEBG_API", "")
+UNSCREEN_API = os.environ.get("UNSCREEN_API", "")
+
 
 #MONGO_URL = os.environ.get("MONGO_URL")
 
@@ -31,8 +34,8 @@ async def new(bot, message):
         msg = await message.reply_photo(photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
 
 
-REMOVEBG_API = "KMFFqrBYBocDHBYbz8Gwa2np"
-UNSCREEN_API = "zhLmhhqxbYrKbXrsw5bbnKeo"
+#REMOVEBG_API = "KMFFqrBYBocDHBYbz8Gwa2np"
+#UNSCREEN_API = "zhLmhhqxbYrKbXrsw5bbnKeo"
 
 @bot.on_message(filters.private & (filters.photo | filters.video | filters.document))
 async def remove_background(bot, update):
