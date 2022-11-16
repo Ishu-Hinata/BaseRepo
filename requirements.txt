@@ -1,3 +1,5 @@
 pyrogram
 dnspython
-tgcrypto==1.2.2
+tgcrypto
+requests
+python-dotenv
