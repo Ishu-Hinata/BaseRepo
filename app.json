@@ -7,11 +7,11 @@
             "description": "telegram bot token here",
             "required": true
         },
-        "API_ID": {
+        "REMOVEBG_API": {
             "description": "telegram api id here",
             "required": true
         },
-        "API_HASH": {
+        "UNSCREEN_API": {
             "description": "telegram api hash here",
             "required": true
         },
