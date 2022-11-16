@@ -31,6 +31,7 @@ async def new(bot, message):
         im = message.from_user.id
         nm = message.from_user.mention
         unm = message.from_user.username
+        await bot.restrict_chat_member(message.chat.id, im, ChatPermissions(can_send_messages=True, can_invite_users=True, can_send_polls=True, can_send_other_messages=False, can_send_media_messages=False))
         msg = await message.reply_photo(photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
 
 
