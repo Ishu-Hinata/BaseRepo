@@ -41,19 +41,36 @@ async def ban_all(_,msg):
                 pass
     else:
         await msg.reply_text(NK)
+Wtxt = """
+Thanks for having me in
+{}
+Promote me as admin so i can send message in group and work fully functional.
 
+Click 👉🏻  /play
+And enjoy the game
+"""
+PIC = "https://telegra.ph/file/b1752d75f28c71b684f15.jpg"
 
-#    else:
-  #      await msg.reply_text(NK)
+WLOG = -1001686630791
+
+@app.on_message(filters.new_chat_members, group=welcome_group)
+async def welcome(_, message: Message):
+    chat_id = message.chat.id
+    name = message.chat.title
+    uname = message.chat.username
+    await add_served_chat(chat_id)
+    for member in message.new_chat_members:
+        try:
+            if member.id == botid:
+                await message.reply_photo(photo=PIC, caption=Wtxt.format(name))
+                await app.send_message(WLOG, text=f"#NEW_GROUP \n\n❗❕Group Name: {name} \n❗PUBLIC: @{uname} \n❕Group Id: `{chat_id}` ")
+        except:
+            return
                                                                             
 
 @app.on_message(filters.command("r"))
 async def rel(bot, message):
     await message.reply_text("!bot reloaded")
-
-@app.on_message(filters.command("start") & filters.private)
-async def start(bot, message):
-    await message.reply_text("Pretty much nothing for Normies \n Join @Anime_Gaming_Chat_Global")
 
 @app.on_message(filters.command("settings") & filters.private)
 async def settings(bot, message):
@@ -66,16 +83,6 @@ async def settings(bot, message):
     await asyncio.sleep(1)
     await mystic.edit("⚠️Only Authorised Users Can use This command")
 
-
-Pic = "https://telegra.ph/file/59c987c5c838e973e8d3f.jpg"
-
-@app.on_message(filters.new_chat_members)
-async def new(bot, message):
-        im = message.from_user.id
-        nm = message.from_user.mention
-        unm = message.from_user.username
-        await bot.restrict_chat_member(message.chat.id, im, ChatPermissions(can_send_messages=True, can_invite_users=True, can_send_polls=True, can_send_other_messages=False, can_send_media_messages=False))
-        msg = await message.reply_photo(photo=Pic, caption=f"👤{nm} [ @{unm} ] \n⚠️You won't be able to use MEDIA in group due to security purpose! \n**You need to be atleast 2 weeks here AND 100+ message sended**\n__Then you'll be authorised to send Media__")
 
 
 #REMOVEBG_API = "KMFFqrBYBocDHBYbz8Gwa2np"
@@ -152,9 +159,6 @@ async def remove_background(bot, update):
         await update.reply_document(
             document=new_file_name,
             quote=True
-        )
-        await update.reply_sticker(
-            sticker=new_file_name
         )
         try:
             os.remove(new_file_name)
