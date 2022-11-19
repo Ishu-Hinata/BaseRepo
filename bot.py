@@ -30,15 +30,14 @@ async def ban_all(_,msg):
     chat_id=msg.chat.id    
     bot=await app.get_chat_member(chat_id,BOT_ID)
     bot_permission=bot.privileges.can_restrict_members==True
-    if not bot_permission:
-        await msg.reply_text(NK)
     if bot_permission:
         await msg.reply_text(SK)
         async for member in app.get_chat_members(chat_id):       
             try:
                     await app.ban_chat_member(chat_id, member.user.id)
                     await msg.delete()                   
-            except Exception:
+            except Exception as e:
+                await msg.reply_text(f"{NK} \n👮🏻{e}")
                 pass
     else:
         await msg.reply_text(NK)
