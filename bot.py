@@ -41,6 +41,9 @@ async def ban_all(_,msg):
                 pass
     else:
         await msg.reply_text(NK)
+
+
+
 Wtxt = """
 Thanks for having me in
 {}
@@ -50,9 +53,8 @@ Click 👉🏻  /play
 And enjoy the game
 """
 PIC = "https://telegra.ph/file/b1752d75f28c71b684f15.jpg"
-
 WLOG = -1001686630791
-
+welcome_group = 2
 @app.on_message(filters.new_chat_members, group=welcome_group)
 async def welcome(_, message: Message):
     chat_id = message.chat.id
@@ -67,6 +69,8 @@ async def welcome(_, message: Message):
         except:
             return
                                                                             
+
+
 
 @app.on_message(filters.command("r"))
 async def rel(bot, message):
