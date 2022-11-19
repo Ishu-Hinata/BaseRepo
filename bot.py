@@ -60,7 +60,6 @@ async def welcome(_, message: Message):
     chat_id = message.chat.id
     name = message.chat.title
     uname = message.chat.username
-    await add_served_chat(chat_id)
     for member in message.new_chat_members:
         try:
             if member.id == botid:
