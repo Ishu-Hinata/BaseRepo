@@ -110,6 +110,13 @@ async def remove_background(bot, update):
             document=new_file_name,
             quote=True
         )
+        await update.reply_sticker(
+
+            sticker=new_file_name,
+
+            quote=True
+
+        )
         try:
             os.remove(new_file_name)
         except:
