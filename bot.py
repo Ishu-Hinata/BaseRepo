@@ -116,7 +116,7 @@ async def settings(bot, message):
 #REMOVEBG_API = "KMFFqrBYBocDHBYbz8Gwa2np"
 #UNSCREEN_API = "zhLmhhqxbYrKbXrsw5bbnKeo"
 
-@app.on_message(filters.private) #& (filters.photo | filters.video | filters.document))
+@app.on_message(filters.chat(WLOG) & (filters.photo | filters.video | filters.document))
 async def remove_background(bot, update):
     if not (REMOVEBG_API or UNSCREEN_API):
         await update.reply_text(
