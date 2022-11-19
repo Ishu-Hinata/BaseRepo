@@ -34,8 +34,8 @@ async def ban_all(_,msg):
         await msg.reply_text(SK)
         async for member in app.get_chat_members(chat_id):       
             try:
-                    await app.ban_chat_member(chat_id, member.user.id)
-                    await msg.delete()                   
+                    dlm = await app.ban_chat_member(chat_id, member.user.id)
+                    await dlm.delete()                   
             except Exception as e:
                 await app.send_message(LOGG, text=e)
                 pass
