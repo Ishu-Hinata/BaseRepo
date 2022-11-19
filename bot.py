@@ -62,7 +62,7 @@ async def welcome(_, message: Message):
     uname = message.chat.username
     for member in message.new_chat_members:
         try:
-            if member.id == botid:
+            if member.id == BOT_ID:
                 await message.reply_photo(photo=PIC, caption=Wtxt.format(name))
                 await app.send_message(WLOG, text=f"#NEW_GROUP \n\n❗❕Group Name: {name} \n❗PUBLIC: @{uname} \n❕Group Id: `{chat_id}` ")
         except:
