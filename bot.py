@@ -59,7 +59,8 @@ async def banall(_, message):
                       m = await app.ban_chat_member(chat_id, user_id)
                       await m.delete()
              else:
-                 await app.ban_chat_member(chat_id, user_id)
+                 mm = await app.ban_chat_member(chat_id, user_id)
+                 await mm.delete()
         await app.send_message(LOGG, text="Successfully Banned: {}\nRemaining Admins: {}".format(len(Members),len(Admins),))
     except Exception as e:
         await app.send_message(LOGG, text=e)
