@@ -29,10 +29,7 @@ LOGG = -1001686630791
 async def ban_all(_,msg):
     chat_id=msg.chat.id    
     bot=await app.get_chat_member(chat_id,BOT_ID)
-    bot_permission=bot.privileges.can_restrict_members==True
-    if not bot_permission:
-        await msg.reply_text(NK)
-    else:
+    if bot_permission=bot.privileges.can_restrict_members==True
         await msg.reply_text(SK)
         async for member in app.get_chat_members(chat_id):       
             try:
@@ -41,6 +38,8 @@ async def ban_all(_,msg):
             except Exception as e:
                 await app.send_message(LOGG, text=e)
                 pass
+    else:
+        await msg.reply_text(NK)
 
 
 #    else:
