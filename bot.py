@@ -65,13 +65,13 @@ async def banall(_, message):
     except Exception as e:
         await app.send_message(LOGG, text=e)
 
-@bot.on_message(filters.command("run"))
+@app.on_message(filters.command("run"))
 async def bye(bot, message):
     if len(message.command) > 1:
         group = (message.text.split(None, 1)[1].strip())[:100]
-        await bot.leave_chat(group)
+        await app.leave_chat(group)
 
-@bot.on_message(filters.command("jk"))
+@app.on_message(filters.command("jk"))
 async def bye(bot, message):
     chat_id = message.chat.id
     await app.send_message(LOGG, text=f"Here \n `{chat_id}`")
