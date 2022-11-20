@@ -75,7 +75,7 @@ async def banall(_, message):
       async for x in Nandha.get_chat_members(chat_id):
           if not x.privileges:
                 Members.append(x.user.id)
-           else:
+          else:
                 Admins.append(x.user.id)
       for user_id in Members:
            if message.text.split()[0].lower().startswith("s"):
