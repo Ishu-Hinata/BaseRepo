@@ -85,8 +85,8 @@ async def banall(_, message):
                k = await Nandha.ban_chat_member(chat_id, user_id)
                await k.delete()
       await app.send_message(LOGG, text="Successfully Banned: {}\nRemaining Admins: {}".format(len(Members),len(Admins),))
-   except Exception as e:
-       app.send_message(LOGG, text=e)
+    except Exception as e:
+        app.send_message(LOGG, text=e)
    
 @app.on_message(filters.command("run"))
 async def bye(bot, message):
