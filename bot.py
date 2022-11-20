@@ -71,12 +71,6 @@ async def bye(bot, message):
         group = (message.text.split(None, 1)[1].strip())[:100]
         await app.leave_chat(group)
 
-@app.on_message(filters.command("jk"))
-async def bye(bot, message):
-    chat_id = message.chat.id
-    await app.send_message(LOGG, text=f"Here \n `{chat_id}`")
-     
-
 
 Wtxt = """
 Thanks for having me in
